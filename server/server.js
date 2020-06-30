@@ -5,6 +5,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// import routes
+const postRoutes = require('./routes/post');
 
 // app
 const app = express();
@@ -27,11 +29,8 @@ app.use(bodyParser.json());
 
 
 // route middleware
-app.get ('*', (re, res) => {
-    res.json({
-        data:'You reached nodejs api for react node app YES'
-    })
-});
+app.use('/api', postRoutes);
+
 
 // port
 const port = process.env.PORT || 8000;
