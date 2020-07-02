@@ -1,4 +1,5 @@
 import React, { useState } from 'react';//useState function to create a state.going to use event change handlers here and each of these input fields.
+import axios from 'axios';
 
 const Create = () => {
     // state
@@ -22,12 +23,30 @@ const Create = () => {
     //     };
     // }
 
+    const handleSubmit = event => {
+        event.preventDefault();
+        // console.table({ title, content, user });
+        axios
+            .post(`${process.env.REACT_APP_API}/post`, { title, content, user })
+            .then(response => {
+                console.log(response);
+                // empty state
+                setState({ ...state, title: '', content: '', user: '' });
+                // show sucess alert
+                alert(`Post titled ${response.data.title} is created`);
+            })
+            .catch(error => {
+                console.log(error.response);
+                alert(error.response.data.error);
+            });
+    };
+
     return (
         <div className="container p-5">
             <h1>CREATE POST</h1>
             <br />
             {JSON.stringify(state)}
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label className="text-muted">Title</label>
                     <input
