@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => (
-    <div>
+    <div className="container p-5">
         <h1>Mern App</h1>
     </div>
 );
