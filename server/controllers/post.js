@@ -35,3 +35,13 @@ exports.create = (req, res) => {
     });
     
 };
+
+exports.list = (req, res) => {
+    Post.find({})//we wnat to find all the post,this will give us all post from database.
+        .limit(10)//here you can limit nu,ber of post you want to see in database.
+        .sort({ createdAt: -1 })//here you can also sort by based onthe creative date. (ex new post will be first in oreder)
+        .exec((err, posts) => {
+            if (err) console.log(err);
+            res.json(posts);
+        });
+};
