@@ -1,5 +1,6 @@
 import React, { useState } from 'react';//useState function to create a state.going to use event change handlers here and each of these input fields.
 import axios from 'axios';
+import Nav from './Nav';
 
 const Create = () => {
     // state
@@ -42,7 +43,8 @@ const Create = () => {
     };
 
     return (
-        <div className="container p-5">
+        <div className="container pb-5">
+            <Nav />
             <h1>CREATE POST</h1>
             <br />
             {JSON.stringify(state)}
