@@ -1,7 +1,7 @@
 const Post = require('../models/post');
 const slugify = require('slugify');
 
-
+// create
 exports.create = (req, res) => {
     //console.log(req.body);
     const { title, content, user } = req.body;
@@ -36,6 +36,7 @@ exports.create = (req, res) => {
     
 };
 
+// List all the post
 exports.list = (req, res) => {
     Post.find({})//we wnat to find all the post,this will give us all post from database.
         .limit(10)//here you can limit nu,ber of post you want to see in database.
@@ -46,11 +47,34 @@ exports.list = (req, res) => {
         });
 };
 
+// read post
 exports.read = (req, res) => {
     // console.log(req.pramas.slug)
     const { slug } = req.params;
     Post.findOne({ slug }).exec((err, post) => {
         if (err) console.log(err);
         res.json(post);
+    });
+};
+
+//update post
+exports.update = (req, res) => {
+    const { slug } = req.params;
+    const { title, content, user } = req.body; //we get updated content here for example upadted title content that is saved in database
+    Post.findOneAndUpdate({ slug }, { title, content, user }, { new: true }).exec((err, post) => {
+        if (err) console.log(err);//access post model
+        res.json(post);
+    });
+};
+
+//remove post
+exports.remove = (req, res) => {
+    // console.log(req.pramas.slug)
+    const { slug } = req.params;
+    Post.findOneAndRemove({ slug }).exec((err, post) => {
+        if (err) console.log(err);
+        res.json({
+            message: 'Post deleted'
+        });
     });
 };
