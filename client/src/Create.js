@@ -47,7 +47,7 @@ const Create = () => {
             <Nav />
             <h1>CREATE POST</h1>
             <br />
-            {JSON.stringify(state)}
+            
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label className="text-muted">Title</label>

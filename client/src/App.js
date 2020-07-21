@@ -20,11 +20,30 @@ const App = () => {
         fetchPosts();
     }, []);
 
+    //one click will execute this function and pass the slug as a parameter
+    const deleteConfirm = slug => {
+        let answer = window.confirm('Are you sure you want to delete this post?');//Browser native alert 
+        if (answer) {
+            deletePost(slug);//using axios to make a delete request to our server so we can delete this post.
+        }
+    };
+
+    //using axios to make a delete request to our server so we can delete this post.
+    const deletePost = slug => {
+        axios
+            .delete(`${process.env.REACT_APP_API}/post/${slug}`,)
+            .then(response => {
+                alert(response.data.message);//deleted post no longer in the DB
+                fetchPosts();//make git request to get on the post and wont see deleted post anymore.
+            })
+            .catch(error => alert('Error deleting post'));// erro handler
+    };
+
     return (
         <div className="container pb-5">
             <Nav />
             <br />
-            <h1>MERN CRUD</h1>
+            <h1>NOTE PAD CRUD</h1>
             <hr />
             {posts.map((post, i) => (
                 <div className="row" key={post._id} style={{ borderBottom: '1px solid silver' }}>
@@ -45,7 +64,7 @@ const App = () => {
                                 <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-outline-warning">
                                     Update
                                 </Link>
-                                <button className="btn btn-sm btn-outline-danger ml-1">Delete</button>
+                                <button  onClick={() => deleteConfirm(post.slug)} className="btn btn-sm btn-outline-danger ml-1">Delete</button>
                             </div>
                         </div>
                     </div>

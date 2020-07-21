@@ -5,7 +5,6 @@ import Nav from './Nav';
 const SinglePost = props => {
 //return <div>{JSON.stringify(props)}</div>;
 const [post, setPost] = useState('');//
-
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_API}/post/${props.match.params.slug}`)//this will gice us slugs
@@ -13,8 +12,7 @@ const [post, setPost] = useState('');//
             .catch(error => alert('Error loading single post'));
     }, []);
 
-
-    return (
+     return (
         <div className="container pb-5">
             <Nav />
             <br />
