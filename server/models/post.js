@@ -1,3 +1,6 @@
+//Post schema-before we can save post in database we should create schema for port, 
+//schema is a definition of what a post will look like, such as post requires title content and user name who created this post, 
+//we can use mangoose to define post schema. Having a schema is always good practice t work with the database. In models folder im going to create schema for post.
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
 

@@ -9,7 +9,7 @@ require('dotenv').config();
 const postRoutes = require('./routes/post');
 
 // app
-const app = express();
+const app = express();//epress application is invoked and availablein the app veriable.
 
 //Coonecting to Mongo DB
 mongoose
@@ -22,10 +22,10 @@ mongoose
     .then(() => console.log('DB connected'))
     .catch(err => console.log(err));
 
-// middlewares
+// middlewares(baisacly piece of code that runs in the middle).
 app.use(cors());
-app.use(morgan('dev'));
-app.use(bodyParser.json());
+app.use(morgan('dev'));//using morgan in developmetn mode.
+app.use(bodyParser.json());//without bodyParser wouldnt be able to recieve the request body data sent from client to server.
 
 
 // route middleware
